@@ -1,6 +1,7 @@
 # Hellofresh machine learning engineer tasks
+# 2. Apache Spark
 #
-# Author: chen kai
+# Author: Kai Chen
 # Date: Apr, 2018
 #
 
