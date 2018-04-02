@@ -25,7 +25,7 @@ from pyspark.sql import SparkSession
 from fastparquet import write
 
 def get_mins(str_time):
-    str_time = str_time.replace('PT', '')
+    str_time = str_time.upper().replace('PT', '')
 
     hours = 0
     minutes = 0
@@ -44,7 +44,7 @@ def get_mins(str_time):
     minutes += 60*hours
     return minutes
 
-def add_exta_field(data):
+def add_extra_field(data):
     # Add an extra field to each of the extracted recipes with the name difficulty.
     # The difficulty field would have a value of "Hard" if the total of prepTime and cookTime is greater than 1 hour,
     # "Medium" if the total is between 30 minutes and 1 hour,
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     df_recipes['cookTime_mins'] = df_recipes['cookTime'].apply(get_mins)
     df_recipes['prepTime_mins'] = df_recipes['prepTime'].apply(get_mins)
 
-    df_recipes['Level'] = df_recipes.apply(add_exta_field, axis=1)
+    df_recipes['Level'] = df_recipes.apply(add_extra_field, axis=1)
 
     print("=== Adding extra filed ===")
     print(df_recipes.head())
