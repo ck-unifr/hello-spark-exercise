@@ -9,10 +9,16 @@
 import unittest
 from exercise1 import *
 
-class TestFindVenture(unittest.TestCase):
 
-    def test_find_venture(self):
-        # create a tree
+class TestLink(unittest.TestCase):
+
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def create_link_list(self):
         list_of_links = []
 
         root_link = Link(None, "Root")
@@ -39,7 +45,11 @@ class TestFindVenture(unittest.TestCase):
         account6_link = Link("account4", "account6", account4_link)
         list_of_links.append(account6_link)
 
-        # test
+        return list_of_links
+
+    def test_find_venture(self):
+        list_of_links = self.create_link_list()
+
         venture_name = find_venture(list_of_links, "account5")
 
         self.assertEqual(venture_name, "Hellofresh US")
