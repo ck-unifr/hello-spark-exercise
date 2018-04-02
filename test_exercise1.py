@@ -19,6 +19,10 @@ class TestLink(unittest.TestCase):
         pass
 
     def create_link_list(self):
+        """
+        create a list of links
+        :return: a list contains the links
+        """
         list_of_links = []
 
         root_link = Link(None, "Root")
@@ -48,6 +52,9 @@ class TestLink(unittest.TestCase):
         return list_of_links
 
     def test_find_venture(self):
+        """
+        test the 'find_venture' function in exercise1.py
+        """
         list_of_links = self.create_link_list()
 
         venture_name = find_venture(list_of_links, "account5")

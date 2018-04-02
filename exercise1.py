@@ -6,7 +6,7 @@
 #
 
 class Link(object):
-    parent = None # a link has only one parent
+    parent = None # a link has a parent link
 
     def __init__(self, parent_name, child_name, parent=None):
         self.parent_name = parent_name
@@ -14,6 +14,16 @@ class Link(object):
         self.parent = parent
 
 def find_venture(list_of_links, account_name):
+    """
+    given a list of links and an account name, find the name of the venture it belongs to.
+    - root: the node of the tree with no parent.
+    - venture: all the children of the root.
+    - accounts: all the nodes which are not the root neither the venture nodes.
+
+    :param list_of_links: a list contains the links.
+    :param account_name: a string contains an account name.
+    :return:
+    """
     account = None
 
     #find the account node in the list
@@ -33,6 +43,8 @@ def find_venture(list_of_links, account_name):
 
     return None
 
+
+# Note this is not a proper test. The proper test can be found in 'test_exercise1.py'
 
 # create a tree
 list_of_links = []
