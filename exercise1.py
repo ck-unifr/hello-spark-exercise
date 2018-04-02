@@ -5,7 +5,6 @@
 # Date: Apr, 2018
 #
 
-
 class Link(object):
     parent = None # a link has only one parent
 
