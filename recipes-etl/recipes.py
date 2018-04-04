@@ -25,6 +25,14 @@ from pyspark.sql import SparkSession
 from fastparquet import write
 
 def get_mins(str_time):
+    """
+    given a string, compute the time in minutes
+    :param
+    str_time: a string, e.g., 'PT1H30M'
+
+    :return:
+    minutes: a float contains the time in minutes
+    """
     str_time = str_time.upper().replace('PT', '')
 
     hours = 0
@@ -42,13 +50,20 @@ def get_mins(str_time):
             minutes = int(str_time[0:index_minute])
 
     minutes += 60*hours
+
     return minutes
 
 def add_extra_field(data):
-    # Add an extra field to each of the extracted recipes with the name difficulty.
-    # The difficulty field would have a value of "Hard" if the total of prepTime and cookTime is greater than 1 hour,
-    # "Medium" if the total is between 30 minutes and 1 hour,
-    # "Easy" if the total is less than 30 minutes, and "Unknown" otherwise.
+    """
+    Add an extra field to each of the extracted recipes with the name difficulty.
+    The difficulty field would have a value of "Hard" if the total of prepTime and cookTime is greater than 1 hour,
+    "Medium" if the total is between 30 minutes and 1 hour,
+    "Easy" if the total is less than 30 minutes, and "Unknown" otherwise.
+
+    :param data: a Dataframe
+    :return:
+    a string, 'Hard' or 'Medium' or 'Unknown'
+    """
 
     total_time_mins = data['prepTime_mins'] + data['cookTime_mins']
     if total_time_mins > 60:
@@ -78,9 +93,12 @@ if __name__ == "__main__":
     responses.show()
 
 
+    # -----------
     # Task
     # Extract every recipe that has “Chilies” as one of the ingredients.
-    # Allow for mispelling of the word for example Chiles as well as the singular form of the word.
+    # Allow for mispelling of the word, for example Chiles as well as the singular form of the word.
+    # TODO: write a function which allows for mispelling of the word, for example Chiles as well as the singular form of the word.
+
     print("=== Extract every recipe (chilies) ===")
     df_recipes = responses.filter(responses["ingredients"].contains("Chilies")
                                   | responses["ingredients"].contains("chilies")
@@ -94,12 +112,14 @@ if __name__ == "__main__":
     #print("number of rows {}".format(df_recipes.count()))
     df_recipes.show()
 
-
+    # -----------
     # Task
     # Add an extra field to each of the extracted recipes with the name difficulty.
     # The difficulty field would have a value of "Hard" if the total of prepTime and cookTime is greater than 1 hour,
     # "Medium" if the total is between 30 minutes and 1 hour,
     # "Easy" if the total is less than 30 minutes, and "Unknown" otherwise.
+    # TODO: would it be possible to solve this problem directly on sql.DataFrame ?
+
     df_recipes = df_recipes.toPandas()
 
     df_recipes['cookTime_mins'] = df_recipes['cookTime'].apply(get_mins)
@@ -111,17 +131,18 @@ if __name__ == "__main__":
     print(df_recipes.head())
     print(df_recipes.describe())
 
+    # -----------
     # Task
     # Save the resulting dataset as parquet file
+
     print("=== Saving resulting dataset as parquet file ===")
     out_parquet_file = 'out/recipes.parquet'
     write(out_parquet_file, df_recipes)
     print("save the resulting dataset to {}".format(out_parquet_file))
 
 
-    # Task
-    # Your Spark application could run in Stand-alone mode or it could run on YARN.
 
-
-
+# -------
+# Run the script
+# > spark-submit recipes-etl/recipes.py
 

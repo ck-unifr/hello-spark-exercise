@@ -1,4 +1,5 @@
-# Hellofresh machine learning engineer tasks
+# Hellofresh machine learning engineer task
+#
 # 2. Apache Spark, unit test
 #
 # Author: Kai Chen
@@ -7,6 +8,8 @@
 
 import unittest
 from recipes import *
+import pandas as pd
+import numpy as np
 
 
 class TestLink(unittest.TestCase):
@@ -24,14 +27,18 @@ class TestLink(unittest.TestCase):
         """
         mins = get_mins('PT1h30m')
         self.assertEqual(mins, 90)
-        #self.assertEqual(mins, 60)
 
-    def test_add_extra_field(self):
-        """
-        test function 'add_extra_field' in recipes.py
-        :return:
-        """
-        pass
+        mins = get_mins('PT2h')
+        self.assertEqual(mins, 120)
+
+        mins = get_mins('PT10H')
+        self.assertEqual(mins, 600)
+
+        mins = get_mins('PT30m')
+        self.assertEqual(mins, 30)
+
+        mins = get_mins('PT')
+        self.assertEqual(mins, 0)
 
 
 if __name__ == '__main__':

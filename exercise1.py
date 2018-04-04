@@ -1,4 +1,5 @@
-# Hellofresh machine learning engineer tasks
+# Hellofresh machine learning engineer task
+#
 # 1 General Programming
 #
 # Author: Kai Chen
@@ -26,7 +27,7 @@ def find_venture(list_of_links, account_name):
     """
     account = None
 
-    #find the account node in the list
+    # find the account node in the list
     for link in list_of_links:
         if link.child_name == account_name:
             account = link
@@ -35,6 +36,10 @@ def find_venture(list_of_links, account_name):
         return None
 
     parent = account.parent
+
+    if parent is None:
+        return None
+
     while not parent.parent is None:
         if parent.parent.parent is None:
             return parent.child_name

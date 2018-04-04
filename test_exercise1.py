@@ -58,8 +58,23 @@ class TestLink(unittest.TestCase):
         list_of_links = self.create_link_list()
 
         venture_name = find_venture(list_of_links, "account5")
-
         self.assertEqual(venture_name, "Hellofresh US")
+
+        venture_name = find_venture(list_of_links, "account1")
+        self.assertEqual(venture_name, "Hellofresh UK")
+
+        venture_name = find_venture(list_of_links, "account2")
+        self.assertEqual(venture_name, "Hellofresh UK")
+
+        venture_name = find_venture(list_of_links, "HelloFresh UK")
+        self.assertIsNone(venture_name)
+
+        venture_name = find_venture(list_of_links, "account7")
+        self.assertIsNone(venture_name)
+
+        venture_name = find_venture(list_of_links, "Root")
+        self.assertIsNone(venture_name)
+
 
 if __name__ == '__main__':
     unittest.main()
