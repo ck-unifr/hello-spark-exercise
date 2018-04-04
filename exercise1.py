@@ -49,7 +49,7 @@ def find_venture(list_of_links, account_name):
     return None
 
 
-# Note this is not a proper test. The proper test can be found in 'test_exercise1.py'
+# Note this is not a proper test. The proper unit test can be found in 'test_exercise1.py'
 
 # create a tree
 list_of_links = []
