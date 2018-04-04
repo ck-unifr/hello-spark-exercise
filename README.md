@@ -2,16 +2,16 @@
 
 1. General programming
 
-My solution:
+    My solution:
 
-- exercise1.py
+    - exercise1.py
 
-- test_exercise1.py  (unit test)
+    - test_exercise1.py  (unit test)
 
 2. Apache Spark
 
-My solution:
+    My solution:
 
-- recipes-etl/recipes.py
+    - recipes-etl/recipes.py
 
-- recipes-etl/test_recipes.py (unit test)
+    - recipes-etl/test_recipes.py (unit test)

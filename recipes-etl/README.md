@@ -2,10 +2,11 @@
 
 2. Apache Spark
 
-Requirement:
+    Requirement:
 
-* pyspark
-* fastparquet
+    * pyspark
+    * fastparquet
+
 
 Run the script
 
